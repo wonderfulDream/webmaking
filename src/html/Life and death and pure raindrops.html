@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>Life and death and pure raindrops</title>
+    <link rel="icon" href="beyou.jpeg"><!--制作标题前的小图标*/-->
+    <style>
+        .fixed {
+            display: flex;
+            width: 100%;
+            height: 100px;
+            position: fixed;
+        }
+        .ft {
+            margin: auto;
+            color: lightgoldenrodyellow;
+            font-family: "Segoe Script";
+            font-weight: bolder;
+            font-size: 25px;
+        }
+        @keyframes ani {
+            0% {color: orchid}
+            15% {color: pink}
+            30% {color:lightcoral}
+            45% {color: navajowhite}
+            55% {color: transparent;}
+            65% {color: darkorchid}
+            75% {color: deeppink;text-shadow: 1px 2px 10px mediumorchid;}
+            85% {color: lightgoldenrodyellow}
+            90% {color: mediumorchid}
+            100% {color: aquamarine}
+        }
+        .gra {
+            display: flex;
+            width: 100%;
+            height: 2400px;
+            background-color: rgba(0,0,0,0.9);
+
+        }
+        .cont {margin: auto;
+            width: 50%;
+            height: auto;
+
+        }
+        #text {
+            text-align: center;
+            font-size: 80px;
+            font-weight: bolder;
+            font-family: "Book Antiqua";
+            animation: ani 20s linear 0s infinite alternate;
+        }
+
+
+        .text:after {
+        }
+        .text:after:hover {
+            content: target-text("some");
+        }
+
+
+        @keyframes des {
+            0% {color: lightcoral;}
+            30% {opacity: 10%}
+            60% {color: white}
+            90% {color: powderblue}
+            95% {opacity: 50%}
+            100% {font-weight: bolder;}
+
+        }
+        #new {
+            width: 30%;
+            height: auto;
+            position: relative;
+            margin-top: 205px;
+            margin-left: 12px;
+        }
+
+        #new1 {
+            width: 90%;
+            height: auto;
+            position: relative;
+            margin-top: 330px;
+            margin-left: 65px;
+        }
+        #go {
+            font-family: "Palatino Linotype";
+            font-size:x-large;
+            animation:des 20s linear 0s infinite alternate;
+            opacity: 100%;
+        }
+        #go1 {
+            font-family: "Lucida Sans Unicode";
+            font-size:large;
+            animation:des 30s linear 0s infinite alternate;
+            opacity: 100%;
+
+        }
+
+        #new2 {
+            width: 400%;
+            height: auto;
+            position: relative;
+            margin-top: 300px;
+            margin-left: 25px;
+        }
+        #go2 {
+            font-family: "JetBrains Mono ExtraLight";
+            font-size:large;
+            color: powderblue;
+            animation:des 15s linear 0s infinite alternate;
+            opacity: 100%;
+        }
+        #go3 {
+            font-family: "JetBrains Mono ExtraLight";
+            font-size:large;
+            color: powderblue;
+            animation:des 15s linear 0s infinite alternate;
+            opacity: 100%;
+        }
+
+        .next {
+            background-color: white;
+            width: 100%;
+            height: 1500px;
+
+        }
+        .n1 {
+            width: 50%;
+            height: auto;
+            margin: auto;
+            font-size: larger;
+            font-family: Ebrima;
+            border: 2px 4px pink;
+
+        }
+        .w1 {
+            border: 2px 4px pink;
+            padding: 20px;
+        }
+        .n1:hover {
+            box-shadow:1px 3px 10px gray;
+        }
+
+        .n2 {
+            width: 70%;
+            height: auto;
+            margin-left: 60px;
+            margin-top: 100px;
+            padding: 20px;
+        }
+        .n2:hover {
+            box-shadow:1px 3px 10px gray;
+
+        }
+        .white {
+
+        }
+
+        @keyframes enda {
+
+
+        }
+        .end {
+            position: fixed;
+            bottom: 0;
+            animation: ani 15s;
+            color: powderblue;
+            text-align: center;
+            font-family: Century;
+            font-size: xxx-large;
+            width:100%;
+            height: auto;
+            opacity: 0;
+        }
+        .end:hover {
+            opacity: 100%;
+            box-shadow: 4px 6px 14px lightcoral;
+        }
+        /*#c2 {
+            width: 50%;
+            height: auto;
+            border: 2px solid orchid;
+        }
+        .rotatemark {
+            margin-top: 150px;
+            width: 50%;
+            height: auto;
+            font-family: "Droid Sans Mono";
+            font-size: larger;
+            font-weight: bolder;
+            color: lightcoral;
+            animation: rotate 16s linear 0s infinite alternate;
+        }
+        @keyframes rotate {
+            0% {transform: rotate3d(2,3,6,84deg);}
+            50% {transform: rotate3d(2,3,6,145deg);color:fuchsia }
+            100% {transform: rotate3d(2,3,6,56deg);color: powderblue}
+        }
+        canvas {
+            border-radius: 45px;
+            width: 25%;
+            height: auto;
+            font-family: "Droid Sans Mono";
+            font-size: xxx-large;
+            font-weight: bolder;
+            animation: rota 7s linear 0s infinite alternate;
+        }*/
+
+    </style>
+
+    <script>
+        p1='"Since thou, whom I love with all my heart, dost deny my heart with thy sword, and my life with thy sword, so be it, so be it."'
+        p2='"I forgive you, and perhaps I never should have blamed you."'
+        p3='"You just do not love me. You love the human race, the creatures that remain in the world. You love their smiles so much that you would sacrifice your life for them, so why not? What can I blame you for? Thou art that stands before all the grave sin and suffering of mankind, and in thy holy and fearless sight I see the stars."'/*未声明（没有用var声明）的变量为全局变量，是window的一个属性*/
+        p4='In a world where everything will fall apart, when everything is abandoned like a broken wall on the decayed earth, when all the proud civilization of mankind is about to fall and sink, can those clasped hands not be parted? Can that embrace love be like a candle in the dusk when the mansion is about to fall, a kiss, a dream, an immortal love, a moonlight, and all the primitive things before the flood, become the only thing that man can leave behind in the whole world.'
+        p5='If destined to separate, whether will choose love?'
+        p6='"Love is not a choice," he said dismissively. "It is something closer to its origin, not something that can be captured by the word \'choice\'. Maybe human beings can find in \'love\' the essence and truth of the world they are looking for. I love her, and it\'s not something in the world."'
+        p7='All this is determined in the foundation of life, in the code of the soul, written by the hand of the world before the origin of all.'
+        p8='Love falters in all that decays, as the light of day dies in the brighter days.'
+        p9='This is the catastrophe of mankind, but the only solution to their love.'
+        p10='At last she came to the final day of the earth, and heard the toll of the tower, and the whisper of Satan wandering through the earth, and the fury of hell and purgatory as they vie to devour life.'
+        p11='Apocalyptic visions of the earth collapsing, lava, fire, kissing, parting, or parting in flames.'
+        p12="Then comes to nothing.It all gone."
+        p13='since then……'
+        /*var x=document.getElementById("cc").innerHTML;*/
+
+        function cont(v) {
+            /*if (document.getElementById("cc").innerHTML=='since then……'){
+                document.getElementById("cc").innerHTML=p11;
+            }
+            else {
+                document.getElementById("cc").innerHTML=p10;
+            }*/
+            var x=document.getElementById("cc").innerHTML;
+            switch (x){
+                case p13:x=p1;break;
+                case p1:x=p2;break;
+                case p2:x=p3;break;
+                case p3:x=p4;break;
+                case p4:x=p5;break;
+                case p5:x=p6;break;
+                case p6:x=p7;break;
+                case p7:x=p8;break;
+                case p8:x=p9;break;
+                case p9:x=p10;break;
+                case p10:x=p11;break;
+                case p11:x=p12;break;
+                case p12:x=p13;break;
+                default:x=p12;
+            }
+            document.getElementById("cc").innerHTML =x;
+            /*一定要注意首先你是先把X这个变量指向document.getElementById("cc").innerHTML，然后在switch case的循环转换中又重新给x赋了值、改变了它引用的指向，其实正确的流程应该是先把x作为document.getElementById("cc")去改变X的值，然后再给document.getElementById("cc").innerHTML赋值为每一次改变的x的值。
+            所以关键就是在于x是个变量，是个引用，第一次指了document.getElementById("cc").innerHTML后，在后面的改变中重新赋值那就不再指document.getElementById("cc").innerHTML，所以最后关键一步是给document.getElementById("cc").innerHTML赋值为x
+             */
+        }
+    </script>
+    <style>
+        @keyframes des {
+            0% {color: lightcoral;}
+            20% {opacity: 50%;color: lemonchiffon}
+            40% {color: darkslateblue}
+            60% {color: mediumvioletred}
+            80% {opacity: 50%;color: rosybrown}
+            100% {font-weight: bolder;color: bisque}
+        }
+        #cc {
+            margin: auto;
+            font-weight: bolder;
+            font-size: xx-large;
+            font-family: "Palatino Linotype";
+            animation: des 25s linear 0s infinite alternate;
+            text-align: center;
+        }
+        #fir {
+            width: 100%;
+            height: 50vh;
+            background-color: black;
+            display: flex;
+        }
+    </style>
+
+</head>
+<body>
+<div class="fixed">
+    <p class="ft">Life and death and pure raindrops</p>
+</div>
+    <div class="gra">
+        <div class="cont">
+            <p id="text" onclick="ctn()">
+                "I forgive you. Maybe I never should have blamed you."
+            </p>
+            <div>
+                <div id="new">
+                    <p id="go">If destined to separate, whether will choose love?</p>
+                <div id="new1">  <p id="go1">Love falters in all that decays, as the light of day dies in the brighter days.</p>
+                </div>
+                    <div id="new2">
+                        <p id="go2">This is the catastrophe of mankind, but the only solution to their love.
+                        </p>
+                        <p id="go3">
+                            But at the end of the fall of mankind, it is you I wish for. You are my last vow.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+<div class="next">
+    <div>
+
+    </div>
+    <!--<div class="rotatemark">
+        <canvas id="c2">
+            <script>/*
+                var c2=document.getElementById("c2");
+                var ctx=c2.getContext("2d");
+                ctx.moveTo(2,2);
+                ctx.lineTo(100,200);
+                ctx.lineWidth = 10;
+                ctx.strokeStyle = 'rgba(255,0,0,0.5)';
+                ctx.stroke();*/
+            </script>
+        </canvas>
+    </div>
+    <div class="rotatemark">
+        <p>......</p>
+        <p>..............</p>
+        <p>........................</p>
+    </div>-->
+    <div class="n1">
+        <p>At last came to the end of the earth</p>
+        <p class="w1">
+            "You just don't love me. You love the human race, the creatures that remain in the world. You love their smiles so much that you would sacrifice your life for them, so why not? What can I blame you for? Thou art that stands before all the grave sin and suffering of mankind, and in thy holy and fearless sight I see the stars."
+        </p>
+    </div>
+        <div class="n2">
+            <p class="w2">
+            In a world where everything will fall apart, when everything is abandoned like a broken wall on the decayed earth, when all the proud civilization of mankind is about to fall and sink, can those clasped hands not be parted? Can that embrace love be like a candle in the dusk when the mansion is about to fall, a kiss, a dream, an immortal love, a moonlight, and all the primitive things before the flood, become the only thing that man can leave behind in the whole world.
+        </p>
+    </div>
+</div>
+<div class="end">
+    <p class="endp">Would you love me till the end?</p>
+</div>
+<div class="white">
+    <div class="w1">
+        <p>
+
+        </p>
+    </div>
+</div>
+
+<div id="fir" onclick="cont()">
+    <p id="cc" >since then……</p>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>JSP</title>
+    <script>
+    /* HTML 中的脚本必须位于script与/script标签之间。
+  脚本可被放置在 HTML 页面的body和head部分中。脚本可位于 HTML 的body或head部分中，或者同时存在于两个部分中。
+    通常的做法是把函数放入head部分中，或者放在页面底部。这样就可以把它们安置到同一处位置，不会干扰页面的内容。
+    也可以把脚本保存到外部文件中。外部文件通常包含被多个网页使用的代码。
+    外部 JavaScript 文件的文件扩展名是 .js。
+    如需使用外部文件，请在script标签的 "src" 属性中设置该 .js 文件：src="myScript.js"
+    外部脚本不能包含 script>标签。js大小写敏感
+    js会忽略多余的空格。您可以向脚本添加空格，来提高其可读性。
+    JavaScript 是脚本语言，浏览器会在读取代码时，逐行地执行脚本代码。而对于传统编程来说，会在执行前对所有代码进行编译。*/
+
+    /*JavaScript 输出
+JavaScript 没有任何打印或者输出的函数。
+JavaScript 显示数据
+JavaScript 可以通过不同的方式来输出数据：
+使用 window.alert() 弹出警告框。
+使用 document.write() 方法将内容写到 HTML 文档中。
+使用 innerHTML 写入到 HTML 元素。
+使用 console.log() 写入到浏览器的控制台。*/
+
+    /*您可以在文本字符串中使用反斜杠对代码行进行换行。下面的例子会正确地显示：
+document.write("你好 \
+世界!");输出为：你好 世界! 无论中间添加多少空格以及反斜杠，最后起作用的只有一个空格或一个反斜杠，即无论如何最后只会显示一个空格间隙*/
+
+    /*数据类型：JavaScript 变量还能保存其他数据类型，比如文本值 (name="Bill Gates")。
+    Symbol 是 ES6 引入了一种新的原始数据类型，表示独一无二的值。
+    JavaScript 拥有动态类型。这意味着相同的变量可用作不同的类型。
+    当您向变量分配文本值时，应该用双引号或单引号包围这个值。您可以在字符串中使用引号，只要不匹配包围字符串的引号即可：
+当您向变量赋的值是数值时，不要使用引号。如果您用引号包围数值，该值会被作为文本来处理。
+创建数组的三种写法：
+var cars=new Array();
+cars[0]="Saab";
+cars[1]="Volvo";
+cars[2]="BMW";
+或者 (condensed array):
+var cars=new Array("Saab","Volvo","BMW");   使用了构造器，new字符。
+或者 (literal array):
+var cars=["Saab","Volvo","BMW"];    []是数组的标志，就像()是函数的标志。
+
+创建对象
+对象由花括号分隔。在括号内部，对象的属性以名称和值对的形式 (name : value) 来定义。属性由逗号分隔：
+var person={firstname:"John", lastname:"Doe", id:5566};
+上面例子中的对象 (person) 有三个属性：firstname、lastname 以及 id。
+空格和折行无关紧要。声明可横跨多行：
+var person={
+firstname : "John",
+lastname  : "Doe",
+id        :  5566
+};
+对象属性有两种寻址方式：
+name=person.lastname;     对象.属性
+name=person["lastname"];     对象["属性"]
+
+Undefined 这个值表示变量不含有值。可以通过将变量的值设置为 null 来清空变量。
+
+当您声明新变量时，可以使用关键词 "new" 来声明其类型：
+var carname=new String;
+JavaScript 变量均为对象。当您声明一个变量时，就创建了一个新的对象。JavaScript 对象是属性变量的容器。JavaScript 对象是键值对的容器。
+
+一个好的编程习惯是，在代码开始处，统一对需要的变量进行声明。您可以在一条语句中声明很多变量。该语句以 var 开头，并使用逗号分隔变量即可。一条语句中声明的多个变量不可以同时赋同一个值:var x,y,z=1;x,y 为 undefined， z 为 1。
+如果重新声明 JavaScript 变量，该变量的原本值不会丢失。
+
+
+     */
+
+    /*window.alert("你说啥，这里风太大我听不见！");
+    /*这一条会在页面加载时直接运行出现警示框，并且在用户点击警示框中的确定选项后才可以加载页面完毕，显示页面内容。不需要什么用户操作呀，点按呀！实话说，先声夺人，有点流氓。hh*/
+
+    document.write("<h1>heading</h1>");
+    /*	如需从 JavaScript 访问某个 HTML 元素，您可以使用 document.getElementById(id) 方法。
+请使用 "id" 属性来标识 HTML 元素，并 innerHTML 来获取或插入元素内容：
+比如document.getElementById("demo").innerHTML = "段落已修改。";这种直接一句语句修改，省略了赋变量名的操作。
+您只能在 HTML 输出中使用 document.write。如果您在文档加载后使用该方法，会覆盖整个文档。*/
+
+
+    function fun1()
+    {
+      fac=document.getElementById("flo");
+      fac.innerHTML="But then it would die after the long cold winter.";
+    }
+    function fun2()
+    {
+      far=document.getElementById("flo")
+      fac.innerHTML="In a early warm spring ,rose came to the wind city."
+    }
+
+
+    function fun3()
+    {
+      ima=document.getElementById("blue");
+      if(ima.src.match("blueyou1.jpg"))
+              /*此处的match是宽松型检索，即检索src 属性的值有没有包含blueyou这个字符串,为避免重名造成的干扰，此处选用了严格的完整相对路径*/
+      {
+        ima.src="blueyou2.png";
+      }
+      else
+      {
+        ima.src="blueyou1.jpg";
+      }
+    }/*通过使用这个响应函数，我们可以点击改变显示的图片！可喜可贺！*/
+
+
+
+    function fun4()
+    {
+      col=document.getElementById("chacol");
+      col.style.color="orchid";
+    }/*改变 HTML 样式
+      改变属性值的一个例子，JavaScript 能够改变任意 HTML 元素的大多数属性，而不仅仅是图片。改变 HTML 元素的样式，属于改变 HTML 属性的变种。而且一般点击改变后并不会再修改回来……*/
+
+    function ensure()
+    {
+      var x=document.getElementById("num").value;
+      if (isNaN(x)||x.replace(/(^\s*)|(\s*$)/g,"")=="")
+      {
+        alert("请保证输入字符全部是数字 ，否则输入不合法。");/*alert是调用警示框的函数，参数值是警示框中会出现的文本，*/
+      }
+      else
+      {
+        alert("输入合法！不过这只是用来试验的，输入不合法也没关系啦!");
+      }
+    }/*验证输入： 在生产环境中使用，需要严格判断，如果输入的空格，或者连续空格 isNaN 是判别不出来的。可以添加正则来判断（后续章节会说明）。*/
+
+    function showdate() {
+      document.write(Date());
+    }/*
+请使用 document.write() 仅仅向文档输出写内容。
+如果在文档已完成加载后执行 document.write，整个 HTML 页面将被覆盖。
+比如这一个例子，在执行该函数时，整个页面仅显示日期，之前所在页面被整个覆盖，由于不是进入了不同网址的页面，所以连返回操作都没有，只能刷新页面回到最初的起点。*/
+
+  </script>
+
+    <script>
+        function ctn()
+        {
+            document.getElementById("text").innerHTML="Apocalyptic visions of the earth collapsing, lava, fire, kissing, parting, or parting in flames."
+        }
+        var c=document.getElementById("mycanvas");
+        var ctx=c.getContext("2d");
+        ctx.moveTo(0,0);
+        ctx.lineTo(150,40);
+        ctx.stroke();
+        ctx.fillStyle="red";
+    </script>
+    <style>
+        canvas {
+            width: 50%;
+            height: auto;
+            font-family: "Droid Sans Mono";
+            font-size: larger;
+            font-weight: bolder;
+            color: lightcoral;
+            animation: rota 7s linear 0s infinite alternate;
+
+        }
+
+        #rot {
+            width: 50%;
+            height: auto;
+            font-family: "Droid Sans Mono";
+            font-size: larger;
+            font-weight: bolder;
+            color: lightcoral;
+            animation: rota 5s linear 0s infinite alternate;
+        }
+        @keyframes rota {
+            0% {transform: rotate3d(2,3,6,84deg);}
+            25% {transform: rotate3d(56,78,150,86deg);}
+            50% {transform: rotate3d(45,23,20,145deg);color:fuchsia }
+            100% {transform: rotate3d(145,253,18,56deg);color: powderblue}
+        }
+
+
+    </style>
+
+</head>
+<body>
+<div class="thefirst">
+    <button type="button" onclick="alert('Welcome')">Click here</button>
+        <!-- 先在type中指定显示为button样式，然后在onclick事件(即鼠标点击时）中调用alert() 函数实现点击按钮后页面上方出现提示框响应 button标签中的Click here是页面中按钮上将要显示的文本-->
+
+    <p id="flo">Flower bloomed everywhere!</p>
+    <button type="button" onclick="fun1()">let's see what changes.</button>
+    <button type="button" onclick="fun2()">let's see what then changes.</button>
+<!-- 此处onclick调用了上面自定义的fun函数，在用户点击按钮时可以看见前面的flo标签的内容更改为新写入的fac.innerHTML的字段,使用这种方法可以实现与用户的实时交互，即用户点击某元素时便可以产生对其他元素的更改。-->
+
+    <div>
+      <img loading="lazy" id="blue" onclick="fun3()" src="blueyou1.jpg" width="200" height="auto" alt="ima">
+      <!--设置图片按比例缩放的一个办法，固定width为某值，再设定height为auto 或者 固定height为某值，再设定width为auto，这个其实不完全能说是按比例，因为其中一边被固定住了，不是时刻可随意动态缩放模式。-->
+    </div>
+
+    <div id="chacol" style="color: darkorange" onclick="fun4()">
+      so what else?
+    </div>
+
+    <input id="num" type="text">
+    <button type="button" onclick="ensure()">验证是否输入合法</button><br>
+    <p id="date">Would you like to tell me what date ,I have lost my memory for long time.</p>
+    <button type="button" onclick="showdate()">What date is it today?</button>
+
+    <p id="demo" onclick="person.retname()">点击</p>
+    <p id="demo2" onclick="person.retname()">dianji</p>
+<script>
+    var person = {fistname:"hi",lastname:"hai",age:15,eyecolor:"blue",
+    retname:function (){/*注意在js中函数是作为变量的属性的，格式和其他键值对一样，要有冒号，属性名字后面写具体的值，只是这里的值是函数，需要函数的括号参数表和大括号函数体格式。务必要注意分号的存在与否等书写。冒号前面写函数名（属性名称），冒号后面写function（）{中写具体函数体} 而且注意这不是一个类，而是直接就是一个对象
+    一个写在script的不是属于某个对象定义中的函数可以直接在HTML中运行，就像window.write那样*/
+        document.getElementById("demo").innerHTML = person.fistname+"and"+person.age+" "+person["eyecolor"];
+        document.getElementById("demo2").innerHTML = person.retname;/*好家伙，显示的定义居然把我的注释也给搞上去了，说好的不识别是指编译器不识别，但是你显示定义时是直接复制粘贴的吧*/
+    }
+    };
+
+    function mf(good ,bad ) {/*小括号里写参数的指示变量名，作为函数内的局部引用，变量名怎么能写字符串呢？标识符只能字母数字和下划线，没有双引号。函数的妙用就是输入不同参数就是指在不同情形下重复调用一种功能。*/
+        alert("you are "+good + "and you "+bad);
+    }
+</script>
+<button type="button" onclick="mf('so','dream')">Click</button>
+<!--注意由于js是多态的，弱类型的，所以由于未指明类型导致读数据有些麻烦，比如在这里你就不能直接写onclick="mf(so,dream)"，因为浏览器不知道你说的so 是什么类型，dream是什么类型，难道你能说good和bad是类型吗?不是,js可没有自定义类型，它有的都是变量，good和bad不过是在函数定义时给参数引用的别名而已，但是输出依旧是需要类型来告诉浏览器这是什么类型，需要如何读，如何存储，如何输出，所以在这里加上两个单引号，告诉浏览器这是字符串类型。JS只有字符串类型没有字符类型。-->
+<p onclick="alert(/fname/i.test('dsfiufguiyfhaih'))">
+    何来风月祭？
+</p>
+<p id="canna">
+    nomoon
+</p>
+<script>
+    (function (){
+        document.getElementById("canna").innerHTML="if you are a kiss lying on my eyes……I would ";
+    })();/*自调用函数，注意格式，先用一个小括号把整个函数部分包起来，写完函数后再加上一个小括号，实际上，这是一个匿名自调用函数。自调用是指在页面加载完成后自动调用的函数，不是指自己调用自己，不是指cpp中的嵌套调用*/
+</script>
+</div>
+
+<div id="flow">
+    <canvas id="c2">
+        <script>
+            var c2=document.getElementById("c2");
+            var ctx=c2.getContext("2d");
+            ctx.moveTo(2,2);
+            ctx.lineTo(100,200);
+            ctx.lineWidth = 10;
+            ctx.strokeStyle = 'rgba(255,0,0,0.5)';
+            ctx.stroke();
+        </script>
+    </canvas>
+</div>
+<div>
+    <canvas id="c3">
+        <script>
+            var c2=document.getElementById("c3");
+            var ctx=c2.getContext("2d");
+            ctx.moveTo(2,2);
+            ctx.lineTo(100,900);
+            ctx.lineWidth = 10;
+            ctx.strokeStyle = 'rgba(45,95,133,0.3)';
+            ctx.stroke();
+        </script>
+    </canvas>
+</div>
+<div id="rot">
+    <p>
+        Gone with the wind
+    </p>
+</div>
+
+</body>
+</body>
+</html>

@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>set</title>
+    <script src="jquery-3.6.0.js"></script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }/*首先确保所有的 HTML 元素都有 box-sizing 属性且设置为 border-box。
+确保边距和边框包含在元素的宽度和高度间。*/
+        .row:after {
+            content: none;
+            clear: both;
+            display: block;
+        }/*列中行为左浮动，并添加清除浮动*/
+        [class*="col-"] {
+            float: left;
+            padding: 15px;
+        }/*所有的列向左浮动，间距(padding) 为 15px*/
+        .col-1 {width: 8.33%;}
+        .col-2 {width: 16.66%;}
+        .col-3 {width: 25%;}
+        .col-4 {width: 33.33%;}
+        .col-5 {width: 41.66%;}
+        .col-6 {width: 50%;}
+        .col-7 {width: 58.33%;}
+        .col-8 {width: 66.66%;}
+        .col-9 {width: 75%;}
+        .col-10 {width: 83.33%;}
+        .col-11 {width: 91.66%;}
+        .col-12 {width: 100%;}/*12 列的网格系统可以更好的控制响应式网页。
+首先我们可以计算每列的百分比: 100% / 12 列 = 8.33%。
+在每列中指定 class， class="col-" 用于定义每列有几个 span */
+        html {
+            font-family: "Candara Light","Franklin Gothic Medium";
+        }
+        .header {
+            background-image: linear-gradient(67deg,orchid,lemonchiffon,bisque,ivory,lightcoral,transparent);
+            color: indianred;
+            padding: 5px;
+            font-family: "Palatino Linotype";
+            font-weight: bolder;
+            font-size: x-large;
+            text-align: center;
+        }
+        .header h1 {
+            background-image:-webkit-linear-gradient(left,ivory,antiquewhite,palevioletred,transparent,ivory);
+            -webkit-background-clip:text;
+            -webkit-text-fill-color:transparent;
+        }
+        .menu ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+        .menu li {
+            padding: 18px;
+            margin-bottom: 7px;
+            background-image: linear-gradient(53deg,peachpuff,transparent,pink,ivory);
+            color: palevioletred;
+            box-shadow: 0 1px 3px gray;
+        }
+        .menu li:hover {
+            background-image: linear-gradient(94deg,lightgrey,darksalmon,lightcoral,transparent);
+            font-family: "Segoe Script";
+            font-weight: bolder;
+            color: aliceblue;
+            box-shadow: 2px 4px 5px gray;
+            text-align: center;
+            border-radius: 12px;
+        }
+
+    </style>
+
+    <style>
+        .circle {
+            display: inline;
+            width: 50px;
+            height: 50px;
+            fill:url(#grad1);
+            background-color: powderblue;/*显色*/
+        }
+        .growCircleDiv {
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            background-color: lightpink;/*显色*/
+        }
+    </style>
+
+    <script>
+        $(document).ready(function(){
+            $("#hovercontainer1").click(function(){
+                $("#hoverctdiv1").slideToggle("slow");
+            });
+
+            $("#h").click(function(){
+                $("#o").slideToggle("slow");
+            });
+        });
+    </script>
+    <style>
+        .autoContainer {
+            width: 100%;
+            height: 60px;
+            display:flex;/*由此可以说明两个容器，注意设置容器的width和height和bgc来看到具体实现效果，容器display为flex，content的margin设定为auto,auto其实就是上下和左右的边距居中。*/
+            background-color: lightpink;
+        }
+        .autoContent {
+            margin: auto;
+        }
+
+        .wholesvg {
+            width: 30px;
+            height: 30px;
+            /*background-color: khaki;*/
+        }
+        .circle {
+            fill:url(#grad1);
+        }
+    </style>
+    <style>
+        .shinydiv {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: auto;
+        }
+        .shinytext {
+            border: 2px solid white;
+            background-color: peachpuff;
+            text-transform: uppercase;
+            color: lightskyblue;
+            padding: 15px 50px;
+            outline: none;
+            overflow: hidden;
+            position: relative;
+        }
+        .shinytext:after {
+            content: '';
+            display: block;
+            position: absolute;
+            top: -36px;
+            left: -100px;
+            background: white;
+            width: 50px;
+            height: 125px;
+            opacity: 20%;
+            transform: rotate(-45deg);
+        }
+        .shinytext:hover:after {
+            left: 120%;
+            transition: all 1s cubic-bezier(0.3, 1, 0.2, 1);
+            -webkit-transition: all 1s cubic-bezier(0.3, 1, 0.2, 1);
+        }
+
+    </style>
+
+    <style>
+        .gradient-text-one{
+            background-image:-webkit-linear-gradient(bottom,aquamarine,peachpuff,lemonchiffon);
+            -webkit-background-clip:text;
+            -webkit-text-fill-color:transparent;
+        }
+        p {color: antiquewhite;}
+    </style>
+
+    <style>
+        .dropbtn {
+            background-color:orchid;
+            color: white;
+            padding: 16px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+        }
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        .dropdown-content {
+            font-family: 宋体;
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            text-align: center;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        }
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+        .dropdown-content a:hover {background-color: #f1f1f1}
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        .dropdown:hover .dropbtn {
+            background-color: darkorchid;
+        }
+    </style>
+
+    <style>
+        /*svg默认的宽度为200px，当发现描绘的图形无法显示时，要注意有没有设置Svg的宽度为百分比单位，高度为自适应。而且由于是矢量作图，准确具体的像素单位所以定位就像是无法所缩放一样。x,y的坐标都是指离左上角顶点的距离，比如x指离页面左框的距离。
+        对线条是没有fill填充属性的
+        多线段 折线 应该设置fill为none,且它是不闭合的，这就是它和多边形作图的不同之处，就是首尾线段并不会自动连接。
+        text文本无法弯曲显示，无语
+        滤镜是滤不出来了*/
+
+        /*<svg>的尺寸了（默认是300*150）*/
+    </style>
+
+    <style>
+        #go {
+            margin: 50px;
+            width: 100px;
+            height: 100px;
+            border: 1px solid peachpuff;
+            background-color: pink;
+            box-shadow: 2px 4px 13px gray;
+            transition: width 2s,height 2s,border 2s,background-color 2s;/*过渡是元素从一种样式逐渐改变为另一种的效果。必须规定两项内容：指定要添加效果的CSS属性和指定效果的持续时间。如果未指定的期限，transition将没有任何效果，因为默认值是0。*/
+        }
+        #go:hover {
+            width: 60px;
+            height: 130px;
+            border: 2px dot-dot-dash fuchsia;
+            background-color: aquamarine;
+            box-shadow: none;/*下面写过渡后的目标属性，鼠标离开后即恢复原状*/
+        }
+        #ani {
+            margin: 50px;
+            width: 200px;
+            height: 400px;
+            font-family: Bahnschrift;
+            font-size: x-large;
+            color: aquamarine;
+            text-align: center;
+            border-radius: 35px;
+            background-image: repeating-linear-gradient(32deg,yellowgreen,palevioletred,transparent,lightgoldenrodyellow,rgba(89,243,76,0.4));
+            border: 1px 5px 16px aqua;
+            position: relative;
+            animation: darling 10s linear 0s infinite alternate;
+        }
+        @keyframes darling {
+            0% {
+                width: 150px;
+                height: 250px;
+                background-color: aqua;
+            }
+            15% {
+                box-shadow: gray;
+                height: 175px;
+                background-color: palevioletred;
+                border-radius: 32px/17px;
+            }
+            25% {
+                color: orchid;
+                font-family: "Book Antiqua";
+                font-size: xx-large;
+                text-shadow: 1px 5px 9px peru;
+            }
+            60% {
+                background-image: repeating-linear-gradient(59deg, gold, rgba(89, 49, 196, 0.4), powderblue, transparent);
+            }
+            90% {
+                color: aquamarine;
+                text-shadow: hotpink;
+                border-radius: 75px/17px;
+            }
+
+            100%
+            {
+                margin: 50px;
+                padding: 90px;
+            }
+        }/*制作keyframe动画。当在 @keyframes 创建动画，把它绑定到一个选择器，否则动画不会有任何效果。指定至少这两个CSS3的动画属性绑定向一个选择器：规定动画的名称和规定动画的时长。 您必须定义动画的名称和动画的持续时间。如果省略的持续时间，动画将无法运行，因为默认值是0。请用百分比来规定变化发生的时间，或用关键词 "from" 和 "to"，等同于 0% 和 100%。
+0% 是动画的开始，100% 是动画的完成。为了得到最佳的浏览器支持，您应该始终定义 0% 和 100% 选择器。
+*/
+        #col {
+            column-count:6;
+            column-fill: auto;
+            column-gap: 50px;
+            column-width: 200px;
+            column-span: 2;
+            column-rule-color: palevioletred;
+            column-rule-style: dotted;
+            column-rule-width: thick;
+        }/*column-count	指定元素应该被分割的列数。
+column-fill	指定如何填充列
+column-gap	指定列与列之间的间隙
+column-rule	所有 column-rule-* 属性的简写
+column-rule-color	指定两列间边框的颜色
+column-rule-style	指定两列间边框的样式
+column-rule-width	指定两列间边框的厚度
+column-span	指定元素要跨越多少列
+column-width	指定列的宽度
+columns	column-width 与 column-count 的简写属性。*/
+    </style>
+
+    <style>
+        @keyframes rotate {
+            0% {transform: translateY(16deg);}
+            25% {transform: skew(25deg,16deg)}
+            50% {transform: scale(2,2)}
+            /*75% {transform: translate(3px,3px)}*/
+            60% {transform: skew(26deg,197deg)}
+            80% {transform: scale(1,1.5)}
+            100% {transform: scale(3,0.5)}
+            /*SVG元素不支持3D转换。但是，有一些解决方法：
+如果svg不包含不应进行转换的元素，则可以在SVG元素上使用 CSS 3d转换本身。难怪文字旋转无法进行。*/
+        }
+        .bendtext {
+            animation: rotate 5s infinite alternate;
+        }
+    </style>
+
+    <style>
+        .wrapper {
+            display: flex;
+            z-index: -5;
+            background-color: paleturquoise;
+            width: 50%;
+            height: 200px;
+            align-items: center;
+            justify-content: center;
+        }
+        .track {
+            position: absolute;
+            border: 2px solid lightslategray;
+            transform-style: preserve-3d;
+            width: 200px;
+            height: 200px;
+            transform: scaleY(0.5) rotateZ(45deg);
+            border-radius: 50%;
+            animation: planet-rotate 20s linear infinite;
+        }
+        .planet {
+            width: 50px;
+            height: 50px;
+            position: absolute;
+            border-radius: 50%;
+            left: calc(50% - 25px);
+            top: -25px;
+            transform: rotateZ(-45deg) scaleY(2);
+            animation: self-rotate 20s linear infinite,color-change 20s linear 0s infinite alternate;
+        }
+
+        /*公转动画*/
+        @keyframes planet-rotate {
+            0% {transform:  rotate(45deg)  scaleY(0.5) rotate(0);}
+            100% {transform:   rotate(45deg)  scaleY(0.5) rotate(360deg);}
+        }
+        /* 自转动画*/
+        @keyframes self-rotate {
+            0% {transform: rotate(0) scaleY(2) rotate(-45deg);}
+            100% {transform: rotate(-360deg) scaleY(2) rotate(-45deg);}
+        }
+        @keyframes color-change {
+            0% {background-image: linear-gradient(48deg,white,lemonchiffon);}
+            25% {background-image: linear-gradient(95deg,white,lightpink);}
+            50% {background-image: linear-gradient(16deg,white,lightgreen);}
+            100% {background-image: linear-gradient(34deg,white,lightskyblue);}
+        }
+    </style>
+
+</head>
+<body>
+
+<div class="header">
+    <h1>The Frontier Of Eden</h1>
+</div>
+<div class="row">
+    <div class="col-3 menu">
+        <ul>
+            <li>The blood</li>
+            <li>The fire</li>
+            <li>The love</li>
+            <li>The death</li>
+        </ul>
+    </div>
+    <div class="col-9">
+        <h1>That is what we people always search for.</h1>
+        <p>There we could find death,there we could find love,there we could find history.</p>
+        <p>Can we lost our soul and thoughts in the clear river and childish dream,can we?Just make the light lighter.</p>
+
+    </div>
+</div>
+
+<div class="growCircleDiv">
+    <svg class="circle">
+     <defs>
+         <linearGradient id="grad1" x1="0%" y1="0%" x2="0%" y2="100%">
+             <stop offset="0%" style="stop-color:lemonchiffon;stop-opacity:1" />
+             <stop offset="50%" style="stop-color:lightskyblue;stop-opacity:1" />
+             <stop offset="100%" style="stop-color:lightpink;stop-opacity:1" />
+         </linearGradient>
+     </defs>
+     <circle r="100" cx="25" cy="25">
+         <animate attributeName="r" begin="0s" dur="4s" repeatCount="indefinite" from="25%" to="50%"></animate>
+     </circle>
+ </svg>
+</div>
+
+<div class="autoContainer">
+    <div class="autoContent">
+        So when could we find the end?
+    </div>
+</div>
+<div class="whiteBlackBall">
+    <svg class="wholesvg" style="width: 40px;height: 40px;">
+        <defs>
+            <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" style="stop-color:white;stop-opacity:1" />
+                <stop offset="75%" style="stop-color:black;stop-opacity:1" />
+                <stop offset="100%" style="stop-color:white;stop-opacity:1" />
+            </linearGradient>
+        </defs>
+        <circle class="circle1" r="20" cx="20" cy="20" fill="url(#grad1)">
+        </circle>
+    </svg>
+    <svg class="wholesvg" style="width: 60px;height: 60px;">
+        <defs>
+            <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" style="stop-color:white;stop-opacity:1" />
+                <stop offset="75%" style="stop-color:black;stop-opacity:1" />
+                <stop offset="100%" style="stop-color:white;stop-opacity:1" />
+            </linearGradient>
+        </defs>
+        <circle class="circle1" r="30" cx="30" cy="30" fill="url(#grad1)">
+        </circle>
+    </svg>
+</div>
+<div class="rightArrow">
+    <svg width="48.388px" height="15.113px"  style="background-color: peachpuff" class="swc_L">
+        <line x1="48.388" y1="7.558" x2="23.81" y2="7.558"/>
+        <polyline points="16.604,0.354 23.81,7.557 16.604,14.76 "/>
+        <polyline points="11.186,0.354 18.393,7.557 11.186,14.76 "/>
+        <polyline points="5.769,0.354 12.975,7.557 5.769,14.76 "/>
+        <polyline points="0.354,0.354 7.56,7.557 0.354,14.76 "/>
+    </svg>
+</div>
+<div class="downArrow"><svg width="70px" height="70px" style="background-color: lightskyblue"> <polygon points="35,30.5 31.7,25 23,25 35,45"/> <path d="M47,25h-8.7L35,30.5L31.7,25H23l12,20L47,25L47,25z M45.2,26L35,43.1L24.8,26h6.4l3.8,6.4l3.8-6.4H45.2L45.2,26z"/></svg></div>
+<div class="shinydiv">
+    <button class="shinytext">Hover me</button>
+</div>
+
+<p class="gradient-text-one">春日来临</p>
+<p class="gradient-text-one">夏日盛宴</p>
+
+<div class="dropdown">
+    <button class="dropbtn">风花雪月</button>
+    <div class="dropdown-content">
+        <a href="https://www.google.com/">流水</a>
+        <a href="https://www.google.com/">月光</a>
+        <a href="https://www.google.com/">剑芒</a>
+    </div>
+</div>
+
+<div class="svgPractice">
+    <svg xmlns="http://www.w3.org/2000/svg" version="1.1"
+         xmlns:xlink="http://www.w3.org/1999/xlink"
+         width="100%">
+        <rect width="200" height="60" style="fill:powderblue;stroke: bisque; stroke-width: 3px; solid-opacity: 0.5">
+        </rect>
+        <rect x="20" y="40" rx="20" ry="12" width="70" height="60" style="fill:lemonchiffon;stroke: fuchsia;stroke-width: 6px;stroke-opacity: 0.6;fill-opacity: 0.3;opacity: 0.5">
+        </rect>
+        <circle r="23" cx="160" cy="62" style="fill: rosybrown;stroke: darkturquoise;stroke-width: 6;stroke-opacity: 0.5;fill-opacity: 0.8; opacity:0.3">
+        </circle>
+        <ellipse rx="90" ry="45" cx="900" cy="60" style="fill: lightgoldenrodyellow;stroke: lightcoral;stroke-width: 6px ;">
+        </ellipse>
+        <line x1="45" y1="35" x2="96" y2="150" style="stroke: rosybrown;stroke-width: 8 ;stroke-linecap: round">
+        </line>
+        <polygon points="45,96 62,89 45,32 26,82 12,67 96,12 165,43 200,46 194,56" style="fill: navajowhite;stroke: sandybrown;stroke-width: 6;fill-rule: evenodd">
+        </polygon>
+        <polyline points="263,165 25,16 165,43" style="stroke: lightcoral;stroke-width: 6px;fill: none" stroke-linecap="butt"></polyline>
+
+
+        <defs>
+            <path id="path1" d="M75,20 a1,1 0 0,0 100,0"/>
+        </defs>
+        <text x="150" y="150" style="fill: mediumvioletred">
+            <textPath xlink:href="#path1">此处长眠者，声名水上书。</textPath>
+        </text>
+
+        <defs>
+            <filter id="f1" x="6" y="6">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="56">that is what you want</feGaussianBlur>
+            </filter>
+        </defs>
+
+    </svg>
+
+
+    <svg>
+
+    </svg>
+
+
+    <svg xmlns="http://www.w3.org/2000/svg" version="1.1"
+         xmlns:xlink="http://www.w3.org/1999/xlink">
+        <defs>
+            <path id="path1" d="M90,12 a1,1 0 0,0 100,100" />
+        </defs>
+        <text x="10" y="200" style="fill:peachpuff;">
+            <textPath xlink:href="#path1">When you look at me ……</textPath>
+        </text>
+    </svg>
+</div>
+
+<div id="col">once I saw you standing bathing in the early spring sunshine ,then you turned around ,I knew ,the whole world was just a background of darling you.Then you knew how fortunate I am, a extremely cold winter morning,I got up with eyes still lack of sleep, I opened the window,it turned out that you have been there for long and long ,you backed to me.However, I caould feel you existence as well as your warm breathe. YOU are the highlight of life.</div>
+<div id="go">风起云涌</div>
+<div style="width: 100%;height: 600px"><div id="ani">Welcome to your world</div></div>
+
+<svg class="bendtextdiv" xmlns="http://www.w3.org/2000/svg" version="1.1"
+     xmlns:xlink="http://www.w3.org/1999/xlink" width="600px" height="300px" style="background-color: lightskyblue">
+    <defs>
+        <path id="path1" d="M90,12 a1,1 0 0,0 100,100" />
+        <defs>
+            <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" style="stop-color:white;stop-opacity:1" />
+                <stop offset="25%" style="stop-color:grey;stop-opacity:1" />
+                <stop offset="50%" style="stop-color:black;stop-opacity:1" />
+                <stop offset="100%" style="stop-color:white;stop-opacity:1" />
+            </linearGradient>
+        </defs>
+    </defs>
+    <text class="bendtext" x="0" y="0" fill="url(#grad1)">
+        <textPath xlink:href="#path1">When you look at me.</textPath>
+    </text>
+</svg>
+
+<div class="wrapper">
+    <div class="track">
+        <div class="planet"/>
+    </div>
+</div>
+
+
+</body>
+</html>

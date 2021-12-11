@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>birth</title>
+    <style>
+        @keyframes celebrate {
+            0% {width: 200px;height: 300px;color: lightskyblue;transform: rotate3d(1,1,1,1deg)}
+            50% {width: 300px;color: lightpink;transform: scale(0.5,0.8)}
+            100% {width: 500px;height: 400px;color: lemonchiffon}
+
+        }
+        .largeone {
+            width: 400px;
+            height: 120px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+        }
+        .puttext {
+            width:200px;
+            height: 200px;
+
+            margin: auto;
+            text-align: center;
+            background-clip: content-box;
+
+            animation: celebrate 10s infinite alternate;
+            font-size: xxx-large;
+            font-family:Gabriola;
+            font-weight: bolder;
+            background-image: linear-gradient(62deg,khaki,lightpink,powderblue,lightskyblue);
+        }
+    </style>
+</head>
+<body>
+<div class="largeone">
+<div class="puttext">
+    HAPPY BIRTHDAY!
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>UI</title>
+    <style>
+        /*  *{}通配符样式,一般用于公共样式的书写,会全局定义。应用于所有html标签 */
+        a {
+            display: inline-block;
+        }
+        #img1 {
+            border-radius:32px;
+            border: 1px solid gray;/*我们利用border来创建缩略图*/
+            box-shadow: 2px 6px 16px lightgray;
+            padding: 5px;
+        }/*注意圆角属性的设置对象为img而不是包含imag的div，不要屡次犯这样的错，不过能够发现也是很好的！当设置属性后发现没有起效，可以考虑是不是属性设错了地方，属性呐，对象呐。可以填入的值有半径px，椭圆px/px,椭圆%（50%到100%的效果都是一样的，就是接近于一个圆。*/
+        /* 把图片作为链接的格式<a href="paris.jpg">
+  <img src="paris.jpg" alt="Paris"></a> 用a包含img */
+        #img2 {
+            max-width: 100%;
+            height: auto;/*响应式图片会自动适配各种尺寸的屏幕.通过重置浏览器大小查看效果.如果你需要自由缩放图片，且图片放大的尺寸不大于其原始的最大值，则可使用以上代码。*/
+        }
+        .ima1 {
+            position: relative;
+        }
+        #img3 {
+            width: 100%;/*响应式的关键，在于此处的宽度百分比和高度的自适应。*/
+            height: auto;
+            opacity: 34%;/*通过设置透明度可以使文字更好地表现。*/
+        }
+        #text {
+            position: absolute;/*注意为了使文本可以在图片中严格定位，我们在对文本使用absolute的同时还需要对包含图片和文本的div（严格注意是对div进行该设置而非img，设置定位属性值为relative，因为：
+            absolute定位原理剖析：
+1.在父元素没有设置相对定位或绝对定位的情况下，元素相对于根元素定位（即html元素）（是父元素没有）。
+2.父元素设置了相对定位或绝对定位，元素会相对于离自己最近的设置了相对或绝对定位的父元素进行定位（或者说离自己最近的不是static的父元素进行定位，因为元素默认是static）。*/
+            top: 5px;
+            left: 5px;
+            font-size: medium;
+            font-family:fantasy;
+            color:lightgoldenrodyellow;
+        }/*图片文本实现部分*/
+        .img4 {
+            width: 100%;
+            height: auto;
+            float: left;
+            max-width: 560px;
+        }
+        .type {
+            width: 100%;
+            height: auto;
+            float: left;
+            max-width: 560px;
+            filter:sepia(100%);
+        }/*图片滤镜 filter 属性用为元素添加可视效果 (例如：模糊与饱和度)
+        关注可以做什么以及每个括号的值，有px的，有%的，有单独一个数字的
+        blur(4px)模糊
+        brightness(250%)曝光
+        contrast(180%)对比度
+        grayscale(100%)黑白 灰调
+        hue-rotate(180deg)色相旋转
+        invert(100%)色相倒置
+        opacity(50%)透明度
+        saturate(7)饱和度
+        sepia(100%)深褐色
+        drop-shadow(8px 8px 10px green)阴影（哈！哈！设置图片的阴影在这里，或者还可以是把图片放在div中，然后设置box-shadow*/
+
+        .resp {
+            margin: 50px;
+            padding: 0 6px;
+            float: left;
+            width: 25%;
+            font-family: fantasy;
+            color: palevioletred;
+        }
+        .img {
+            border: 2px solid peachpuff;
+        }
+        .img:hover {
+            border: 3px solid lemonchiffon;
+        }
+        .img img {
+            width: 100%;
+            height: auto;
+        }
+        @media only screen and (max-width: 700px){
+            .resp {
+                width: 49.99999%;
+                margin: 6px 0;
+            }
+        }
+        @media only screen and (max-width: 500px){
+            .resp {
+                width: 100%;
+            }
+        }/*响应式图片相册 不断复用class代码*/
+
+        /*由于没有还没有学习jsp所以图片模态制作……暂时跳过*/
+
+        button {
+            display: inline-block;
+            cursor: pointer;
+            margin: 4px 2px;
+            padding: 15px 32px;/*设置内外边距*/
+
+            font-size: xx-large;/*设置按钮大小而不是文字大小*/
+            width: 50%;/*设置按钮宽度，如果要设置固定宽度可以使用像素 (px) 为单位，如果要设置响应式的按钮可以设置为百分比。*/
+            background-color: peachpuff;
+            border: 2px solid goldenrod;
+            border-radius: 32px;/*设置圆角*/
+
+            color:rgba(95,46,13,0.4);
+            text-align: center;
+            text-decoration: none;
+        }
+        button:hover {
+            background-color: rgba(76,49,165,0.2);
+            border: 3px solid rgba(98,46,123,0.9);
+            box-shadow: 2px 2px 10px gray;
+            color: rgba(95,46,96,0.8);
+        }/*鼠标悬停效果，其中包含按钮阴影*/
+        .forbidden {
+            opacity: 70%;
+            cursor: not-allowed;
+        }/*禁用按钮*/
+        /*按钮组 使用float:left使按钮成为组合*/
+
+        .flashbutton {
+            transition: all 0.5s;/*transition的作用是当到达某个状态时某些属性发生了变化，那么便使这个属性的变化以给定的时间表现出来，不需要给出是那些属性发生了改变，因为浏览器会识别出哪些属性发生了变化然后随之显示出过渡，当然也是可以给出改变的属性的*/
+        }
+        .flashbutton span {
+            cursor: pointer;
+            display: inline-block;
+            position: relative;
+            transition: 0.5s;
+        }
+        .flashbutton span:after {
+            content: '……';/*悬停时时新出现的内容*/
+            position: absolute;/*使用absolute时，一定要注意它是以离它最近的已定位的元素为父元素*/
+            opacity: 0;
+            top: 0;
+            right: -20px;
+            transition: 0.5s;
+        }
+        .flashbutton:hover span {
+            padding-right: 100px;/*span的过渡移动*/
+        }
+        .flashbutton:hover span:after {
+            opacity: 1;
+            right: 0;/*span:after的过渡移动*/
+        }/*制作悬浮时出现移动标记的按钮动画
+        设置hover时的transition，作为flash的标志，可以用all值，这样就不用把每一个要变化的值都表示出来，什么时候才需要呢？当不同属性值的变化的duration动画时间不同时。
+        注意在span中设置:after，并在其中添加content为要出现的内容
+        通过前后opacity的0至1的变化以及诸如padding-right到right=0的变化体现flash
+        */
+        .wavebutton {
+            position: relative;
+            transition: 5s;
+            overflow: hidden;
+        }
+        .wavebutton:after {
+            content: "";
+            background-color: powderblue;
+            display: block;
+            position: absolute;
+            padding-top: 300%;
+            padding-left: -20px;
+            margin-left: -20px;
+            margin-top: -120%;
+            opacity: 0;
+            transition: all 0.8s;
+        }
+        .wavebutton:hover {
+            padding: 0;
+            margin: 0;
+            opacity: 1;
+            background-image: repeating-linear-gradient(29deg,palevioletred,transparent,peachpuff,sandybrown);/*于是我把悬浮时的效果改成了变动按钮背景颜色*/
+        }/*波纹效果搞不出……*/
+
+        .pressbutton:active {
+            transform: translateY(4px);/*利用2d中的translateY的在竖直方向上平移来实现下压功能*/
+        }
+
+        ul {
+            display: inline-block;
+            padding: 0px;
+            margin: 50px;
+            transition: all 0.5s;
+            border: 1px solid rgba(496,58,43,0.4);
+            background-color: sandybrown;
+            border-radius: 5px;
+        }
+        li {
+            width: 25%;
+            height: auto;
+            display: inline;
+            border: 1px solid rgba(496,58,43,0.4);
+            border-radius: 5px;
+            color: fuchsia;
+        }
+        li a {
+            color: black;
+            float: left;
+            padding: 8px 16px;
+            text-decoration: none;
+            border-radius: 5px;/*圆角边框属性要放到li的a中，直接放到li中说无效的，同时还要把它放到li a:hover中*/
+            transition: background-color .3;
+        }
+        li a:hover {
+            background-color: peachpuff;/*响应式结果，背景加深*/
+            border-radius: 5px;
+        }/*基本时搞定了，但是我也无法解释为什么在表格的末尾的上端会有一个橙色的竖形框……好的，我们进入框大小学习部分*/
+        .box {
+            width: 300px;
+            height: 300px;
+            border: 2px solid salmon;
+            padding: 20px;
+            margin: 45px;
+            box-sizing: border-box;/*通过box和content的对比我们可以很明显地知道大部分时候 box-sizing: border-box;是我们所需要的，它确保width和height一经写定，那么div所占的位置和空间便已经确定，无论是否有padding ,border,margin以及它们的值是多少，它们都会限定在div框架中，当然有时候不合理设值时会溢出，但这时候框架依然没有改变，只是content超出框架显示了。所有元素使用 box-sizing 是比较推荐的。box-sizing默认为content-box，故每次需自己设置*/
+        }
+        .content {
+            width: 300px;
+            height: 300px;
+            border: 2px solid salmon;
+            padding: 20px;
+            margin: 45px;
+        }
+
+/*以下 弹性盒子是 CSS3 的一种新的布局模式。
+CSS3 弹性盒（ Flexible Box 或 flexbox），是一种当页面需要适应不同的屏幕大小以及设备类型时确保元素拥有恰当的行为的布局方式。
+引入弹性盒布局模型的目的是提供一种更加有效的方式来对一个容器中的子元素进行排列、对齐和分配空白空间。
+弹性容器外及弹性子元素内是正常渲染的。弹性盒子只定义了弹性子元素如何在弹性容器内布局。
+弹性子元素通常在弹性盒子内一行显示。默认情况每个容器只有一行。*/
+
+        .ctn1 {
+            margin: 50px;
+            display: flex;
+            width: 50%;
+            height: 500px;
+            flex-direction: row-reverse;/*注意这是写在弹性盒子里的，因为这是有关弹性盒子元素的总体布局，不是写在弹性子元素中的。flex-direction属性指定了弹性子元素在父容器中的位置。flex-direction的值有:
+row：横向从左到右排列（左对齐），默认的排列方式。
+row-reverse：反转横向排列（右对齐，从后往前排，最后一项排在最前面。
+column：纵向排列。
+column-reverse：反转纵向排列，从后往前排，最后一项排在最上面。*/
+            justify-content: space-around;/*内容对齐（justify-content）属性应用在弹性容器上，把弹性项沿着弹性容器的主轴线（main axis）对齐。
+各个值解析:
+flex-start：弹性项目向行头紧挨着填充。这个是默认值。第一个弹性项的main-start外边距边线被放置在该行的main-start边线，而后续弹性项依次平齐摆放。
+flex-end：弹性项目向行尾紧挨着填充。第一个弹性项的main-end外边距边线被放置在该行的main-end边线，而后续弹性项依次平齐摆放。
+center：弹性项目居中紧挨着填充。（如果剩余的自由空间是负的，则弹性项目将在两个方向上同时溢出）。
+space-between：弹性项目平均分布在该行上。如果剩余空间为负或者只有一个弹性项，则该值等同于flex-start。否则，第1个弹性项的外边距和行的main-start边线对齐，而最后1个弹性项的外边距和行的main-end边线对齐，然后剩余的弹性项分布在该行上，相邻项目的间隔相等。
+space-around：弹性项目平均分布在该行上，两边留有一半的间隔空间。如果剩余空间为负或者只有一个弹性项，则该值等同于center。否则，弹性项目沿该行分布，且彼此间隔相等（比如是20px），同时首尾两边和弹性容器之间留有一半的间隔（1/2*20px=10px）。*/
+            align-items: stretch;/*align-items 设置或检索弹性盒子元素在侧轴（纵轴）方向上的对齐方式。
+各个值解析:
+flex-start：弹性盒子元素的侧轴（纵轴）起始位置的边界紧靠住该行的侧轴起始边界。
+flex-end：弹性盒子元素的侧轴（纵轴）起始位置的边界紧靠住该行的侧轴结束边界。
+center：弹性盒子元素在该行的侧轴（纵轴）上居中放置。（如果该行的尺寸小于弹性盒子元素的尺寸，则会向两个方向溢出相同的长度）。
+baseline：如弹性盒子元素的行内轴与侧轴为同一条，则该值与'flex-start'等效。其它情况下，该值将参与基线对齐。
+stretch：如果指定侧轴大小的属性值为'auto'，则其值会使项目的边距盒的尺寸尽可能接近所在行的尺寸，但同时会遵照'min/max-width/height'属性的限制。*/
+            flex-wrap: wrap-reverse;/*flex-wrap 属性用于指定弹性盒子的子元素换行方式。
+各个值解析:
+nowrap - 默认， 弹性容器为单行。该情况下弹性子项可能会溢出容器。
+wrap - 弹性容器为多行。该情况下弹性子项溢出的部分会被放置到新行，子项内部会发生断行
+wrap-reverse -反转 wrap 排列。*/
+            align-content: space-between;/*align-content 属性用于修改 flex-wrap 属性的行为。类似于 align-items, 但它不是设置弹性子元素的对齐，而是设置各个行的对齐。
+各个值解析:
+stretch - 默认。各行将会伸展以占用剩余的空间。
+flex-start - 各行向弹性盒容器的起始位置堆叠。
+flex-end - 各行向弹性盒容器的结束位置堆叠。
+center -各行向弹性盒容器的中间位置堆叠。
+space-between -各行在弹性盒容器中平均分布。
+space-around - 各行在弹性盒容器中平均分布，两端保留子元素与子元素之间间距大小的一半。*/
+            background-image: linear-gradient(56deg,lightgoldenrodyellow,navajowhite,cornflowerblue,hotpink,fuchsia);
+        }
+         .i1 {
+             width: 20%;
+             height: 50%;
+             background-image:linear-gradient(64deg,ivory,transparent,navajowhite,transparent);
+             opacity: 70%;
+             margin: 15px;
+             margin: auto;
+             text-align: center;
+             font-family: "Book Antiqua";
+             font-size: x-large;
+
+        }
+        .i2 {
+            order: 3;/*order: <integer>：用整数值来定义排列顺序，数值小的排在前面。可以为负值。*/
+        }
+        .i3 {
+            order: 1;
+        }
+        .i4 {
+            order: 4;
+        }
+        .ctn2 {
+            width: 50%;/*响应式设计，占页面宽度的某个比例，不可超过百分百*/
+            height: 200px;/*响应式设计下为auto，但是auto的话为只占单行，即弹性盒子默认为单行*/
+            background-color: powderblue;
+            display: flex;/*设置为弹性盒子*/
+        }
+        .i5 {
+            background-color: cornflowerblue;
+            text-align: center;/*设置弹性子元素内的文本居中，如果弹性子元素也是div大框架，要想简便实现完美居中，可以把弹性子元素作为另一级的弹性盒子，其中的元素作为次级弹性子元素。*/
+            width:80%;
+            height: 30px;
+            margin: auto;/*通过使用弹性盒子可以使弹性子元素通过margin: auto属性值完美居中，不用复杂地去设置各种数据.
+            设置"margin"值为"auto"值，自动获取弹性容器中剩余的空间。所以设置垂直方向margin值为"auto"，可以使弹性子元素在弹性容器的两上轴方向都完全居中。
+            完美的居中:使用弹性盒子，居中变的很简单，只需要设置 margin: auto; 可以使得弹性子元素在两上轴方向上完全居中*/
+            align-self: center;/*align-self 属性用于设置弹性元素自身在侧轴（纵轴）方向上的对齐方式。
+各个值解析:
+auto：如果'align-self'的值为'auto'，则其计算值为元素的父元素的'align-items'值，如果其没有父元素，则计算值为'stretch'。
+flex-start：弹性盒子元素的侧轴（纵轴）起始位置的边界紧靠住该行的侧轴起始边界。
+flex-end：弹性盒子元素的侧轴（纵轴）起始位置的边界紧靠住该行的侧轴结束边界。
+center：弹性盒子元素在该行的侧轴（纵轴）上居中放置。（如果该行的尺寸小于弹性盒子元素的尺寸，则会向两个方向溢出相同的长度）。
+baseline：如弹性盒子元素的行内轴与侧轴为同一条，则该值与'flex-start'等效。其它情况下，该值将参与基线对齐。
+stretch：如果指定侧轴大小的属性值为'auto'，则其值会使项目的边距盒的尺寸尽可能接近所在行的尺寸，但同时会遵照'min/max-width/height'属性的限制。*/
+            flex:4 ;/*flex 属性用于指定弹性子元素如何分配空间。
+各个值解析:
+auto: 计算值为 1 1 auto
+initial: 计算值为 0 1 auto
+none：计算值为 0 0 auto
+inherit：从父元素继承
+[ flex-grow ]：定义弹性盒子元素的扩展比率。
+[ flex-shrink ]：定义弹性盒子元素的收缩比率。
+[ flex-basis ]：定义弹性盒子元素的默认基准值。
+以下实例中，第一个弹性子元素占用了 2/4 的空间，其他两个各占 1/4 的空间:
+ .item1 {
+    flex: 2;
+}
+.item2 {
+    flex: 1;
+}
+.item3 {
+    flex: 1;
+}*/
+        }
+
+
+        .grid  {
+            margin-top: 50px;
+            display: grid;/*网格布局:当一个 HTML 元素将 display 属性设置为 grid 或 inline-grid 后，它就变成了一个网格容器，这个元素的所有直系子元素将成为网格元素。*/
+            grid-template-columns: auto auto auto auto auto auto ;/*我们通过 grid-template-columns 和 grid-template-rows 属性来定义网格中的行和列。
+
+这些属性定义了网格的轨道，一个网格轨道就是网格中任意两条线之间的空间。*/
+            grid-gap: 10px;/*grid-gap 属性是 grid-row-gap 和 the grid-column-gap 属性的简写,grid-gap 属性可以同时设置行间距和列间距,前为行后为列。*/
+            background-image: linear-gradient(76deg,lightgoldenrodyellow,hotpink,navajowhite,lavenderblush,orchid);
+            padding: 10px;
+        }
+        .grid > div {
+            background-image: linear-gradient(23deg,lemonchiffon,transparent,ivory);
+            text-align: center;
+            padding: 20px 0;
+            font-size: x-large;
+            font-family: "Comic Sans MS";
+        }
+        .grid > div:hover {
+            box-shadow: 2px 2px 10px grey;
+        }
+        .it1 {
+            grid-column: 1/3;/*网格线的编号顺序取决于文章的书写模式。在从左至右书写的语言中，编号为 1 的网格线位于最左边。在从右至左书写的语言中，编号为 1 的网格线位于最右边。
+接下来我使用了 grid-column-start, grid-column-end, grid-row-start 和 grid-row-end 属性来演示如何使用网格线。
+比如实例我们设置一个网格元素的网格线从第一列开始，第三列结束：*/
+        }
+        .it6 {
+            grid-column: 1/7;
+            grid-row-start: 2/5;/*grid-area 属性
+grid-area 属性是 grid-row-start, grid-column-start, grid-row-end 以及 grid-column-end 属性的简写。*/
+        }
+
+        .mi1 {grid-area: header;}
+        .mi2 {grid-area: menu;}
+        .mi3 {grid-area: main;}
+        .mi4 {grid-area: right;}
+        .mi5 {grid-area: deep;}
+        .mi6 {grid-area: go;}
+        .mi7 {grid-area: footer;}
+
+        .model {
+            margin-top: 50px;
+            display: grid;
+            width: 100%;
+            height: 900px;
+            grid-template-areas:
+                'header header header header header header '
+                'menu main main main main right'
+                'menu main main main main right'
+                'menu main main main main right'
+                'deep main main main main go'
+                'footer footer footer footer footer footer';
+            grid-gap: 10px;
+            background-image: linear-gradient(56deg,darkorange,snow,indianred,transparent,deeppink);
+            padding: 10px;
+        }
+        .model > div {
+            background-image: linear-gradient(29deg,lavenderblush,aquamarine,antiquewhite,bisque,transparent);
+            text-align: center;
+
+            padding: 20px 0;
+            font-family: Bahnschrift;
+            font-size: 16px;
+        }
+
+
+
+
+</style>
+
+    <style>
+        #wel {
+            width: 900px;/*设置div框架的宽度，注意不是使用margin或者padding*/
+            height: 90px;/*设置div框架的高度，注意不是使用margin或者padding*/
+            background-color: white;
+            box-shadow: 10px 10px 10px orchid;/*注意阴影不是给个颜色值就好了，还需要前面三个值。前两个值设置水平位移和竖直位移，第三个值设置渲染强度   指定了水平阴影，垂直阴影，模糊的距离，以及阴影的颜色：*/
+            padding:10px 20px ;/*设置内边距，但调左右没有效果*/
+            text-align: center;
+            font-family:"Segoe Print";
+            font-size: x-large;
+            color: palevioletred;
+            border: 2px solid orchid;
+            border-radius: 50px/15px 70px;/*设置圆角，值便是圆的半径*四值时为从左上开始的顺时针方向，三值为左上，对角线，右下，两值时为左上对角线和右上对角线。也可设置椭圆边框，值为除法*/
+        }
+        #wor {
+            background-image:-webkit-linear-gradient(left,ivory,antiquewhite,orchid,transparent,ivory);
+            -webkit-background-clip:text;
+            -webkit-text-fill-color:transparent;/*设置文字渐变*/
+        }
+        #round {
+            margin: 50px;
+            width: 400px;
+            height: 60px;
+            border: 20px solid transparent;/*需要先设置border。并将其颜色设置为transparent才能使image生效*/
+            border-radius: 30px 70px;/*看来使用图片做边框无法用圆角使图片圆润，这句不生效*/
+            border-image: url("https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fup.enterdesk.com%2Fedpic_source%2F53%2F0a%2Fda%2F530adad966630fce548cd408237ff200.jpg&refer=http%3A%2F%2Fup.enterdesk.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1640525186&t=2ec91d037fe66938623aba7d7d0112c7") 30 30 stretch;/*round指图片平铺重复填充边框，stretch指图片拉伸填充边框*/
+        }
+        /*不如说是把图片的边界作为边界，把文字镶嵌在图片里，而且还有白底框*/
+
+        #wind {
+            text-align: center;
+            font-family:"新宋体";
+        }
+        #water {
+            width: 900px;
+            height: 900px;
+            background: url("https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fup.enterdesk.com%2Fedpic_source%2F53%2F0a%2Fda%2F530adad966630fce548cd408237ff200.jpg&refer=http%3A%2F%2Fup.enterdesk.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1640525186&t=2ec91d037fe66938623aba7d7d0112c7");
+            background-position: top left;
+            background-repeat: repeat;
+        }
+        #echo {
+            text-align: center;
+            font-family: 华文宋体;
+        }
+        #image {
+            width:1100px;
+            height:734px;
+            background-image:url("https://gimg2.baidu.com/image_search/src=http%3A%2F%2Ffile03.16sucai.com%2F2017%2F1100%2F16sucai_p20161114134_7cf.JPG&refer=http%3A%2F%2Ffile03.16sucai.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1640575723&t=3c33bb8f0c061c5e54ab320fd0b795a5"),url("https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.redocn.com%2Fsheying%2F20161103%2Friluowanxia_7381641.jpg&refer=http%3A%2F%2Fimg.redocn.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1640575872&t=27e7042afdfebcbd81501b09b68bf9f3");
+            background-position:left top,right bottom;
+            background-repeat: no-repeat,repeat;
+        }
+        #moon {
+            text-align: center;
+        }
+        #box {
+            width: 900px;
+            height: 900px;
+            background-image: url("http://t14.baidu.com/it/u=3497746873,1488477303&fm=224&app=112&f=JPEG?w=494&h=500");
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+            background-origin: content-box;
+        }
+        #kit {
+            text-align: center;
+        }
+        #grad {
+            height: 200px;
+            background-image: linear-gradient(to right, rgba(255,0,0,1), rgba(255,0,0,0));
+        }
+        #grad1 {
+            height: 200px;
+            background-image: linear-gradient(to right, red,transparent);
+        }
+        #tanni {
+            width: 50%;
+            height: 600px;
+            background-image: repeating-linear-gradient(43deg,fuchsia 20%,hotpink 30%,palevioletred 32%,rgba(48,242,96,0.6),transparent);
+        }
+        #conni {
+            width: 50%;
+            height: 600px;
+            background-image: radial-gradient(farthest-side at 60% 55%,yellowgreen 5%,ivory,blueviolet 26%,rgba(89,56,168,0.6),aqua 31%,transparent);
+        }
+        #fanny {
+            text-align: center;
+            text-shadow:2px 5px 6px aqua;/*指定了水平阴影，垂直阴影，模糊的距离，以及阴影的颜色：h-shadow   v-shadow   blur   spread   color   insect
+
+            水平阴影    垂直阴影   模糊    阴影尺寸  颜色   外阴影转到内阴影 */
+            font-family: 新宋体;
+            font-size: xxx-large;
+            color: peachpuff;
+        }
+
+        #bs {
+            position: relative;
+            box-shadow: 1px 2px 4px rgba(45,63,97,0.6);
+            padding: 10px;
+            background: white;
+        }
+        #bs img {
+            width: 100%;
+            border: 1px solid greenyellow;
+            border-style: inset;
+        }
+        #bs ::after {
+            content: none;
+            position: absolute;
+            z-index: -1;
+            box-shadow: 0px 15px 20px peachpuff;
+            width: 70%;
+            left: 15%;
+            height: 100px;
+            bottom: 0;
+        }/*制作图片框*/
+
+        #boli {
+            margin: 50px;
+            width: 600px;
+            box-shadow: 3px 4px 10px gray;
+            text-align: center;
+        }
+        #text {
+            padding: 10px; /*制作图片卡片*/
+        }
+        #manni {
+            margin: 50px;
+            width: 80%;
+            height: 600px;
+            box-shadow: 4px 4px 16px gray;
+            text-align: center;
+        }
+        #honi {
+            height: 80%;
+            background-color: burlywood;
+            font-size: medium;
+            font-family: 华文宋体;
+        }/*制作文字卡片*/
+        #kalr {
+            width: 100px;
+            height: 100px;
+            white-space: nowrap;
+            width: 12em;
+            overflow: scroll;/*文本溢出处理*/
+            border: 1px solid lavender;
+            box-shadow: 2px 6px 10px gray;
+            font-family: 微软雅黑;
+            color: fuchsia;
+
+        }
+        #dawn {
+            background-image:-webkit-linear-gradient(left,ivory,antiquewhite,orchid,rgba(45,96,145,0.6),ivory);
+            -webkit-background-clip:text;
+            -webkit-text-fill-color:transparent;
+        }
+        #break {
+            width: 11em;
+            border: 1px solid pink;
+            word-wrap: break-word;/*单词太长，不适合在一个区域内，它扩展到外面时
+，自动换行属性允许您强制文本换行，即使这意味着分裂它中间的一个字。 还有keep-all break-all等值*/
+        }
+        #2d {
+            width:500px;
+            height: 500px;
+            transform:rotate(23deg);
+        }
+        /*2d转换
+        translate(px,px)向右 上平移
+        rotate(deg)顺时针旋转
+        scale(，)宽的缩放，高的缩放
+        skew(，)x方向上的倾斜，y方向上的倾斜 如果第二个参数为空，则默认为0，参数为负表示向相     反方向倾斜。
+        matrix()matrix()方法和2D变换方法合并成一个。
+        matrix 方法有六个参数，包含旋转，缩放，移动（平移）和倾斜功能。*/
+        #hh {
+            transform: translate(50px, 200px);
+        }/*在img中可以执行，但是如果把transform放入div中却无法执行
+
+
+        .3d {
+            width: 600px;
+            height: 800px;
+            background-color: pink;
+
+        }
+
+        .3d #3d1{
+                 border: 1px solid lemonchiffon;
+                 transform:rotateX(19deg);
+             }
+        /*translate3d(x,y,z)	定义 3D 转化。
+        translateX(x)	定义 3D 转化，仅使用用于 X 轴的值。
+        translateY(y)	定义 3D 转化，仅使用用于 Y 轴的值。
+        translateZ(z)	定义 3D 转化，仅使用用于 Z 轴的值。
+        scale3d(x,y,z)	定义 3D 缩放转换。
+        scaleX(x)	定义 3D 缩放转换，通过给定一个 X 轴的值。
+        scaleY(y)	定义 3D 缩放转换，通过给定一个 Y 轴的值。
+        scaleZ(z)	定义 3D 缩放转换，通过给定一个 Z 轴的值。
+        rotate3d(x,y,z,angle)	定义 3D 旋转。
+        rotateX(angle)	定义沿 X 轴的 3D 旋转。
+        rotateY(angle)	定义沿 Y 轴的 3D 旋转。
+        rotateZ(angle)	定义沿 Z 轴的 3D 旋转。
+        perspective(n)	定义 3D 转换元素的透视视图。*/
+    </style>
+
+</head>
+<body>
+<div class="firstone">
+<div id="ima"><a href="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fpic15.nipic.com%2F20110629%2F1369025_015339341000_2.jpg&refer=http%3A%2F%2Fpic15.nipic.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1640595674&t=c7590c643a5cfcd72eee91e8d58139ae"><img id="img1" src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fpic15.nipic.com%2F20110629%2F1369025_015339341000_2.jpg&refer=http%3A%2F%2Fpic15.nipic.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1640595674&t=c7590c643a5cfcd72eee91e8d58139ae" width="500px" height="500px"></a></div>
+
+<div><a href="https://img0.baidu.com/it/u=3340111814,1006675052&fm=26&fmt=auto"> <img id="img2" src="https://img0.baidu.com/it/u=3340111814,1006675052&fm=26&fmt=auto"></a></div>
+
+<div class="ima1"><a href="https://img2.baidu.com/it/u=3246628741,3439955235&fm=26&fmt=auto" ><img id="img3" src="https://img2.baidu.com/it/u=3246628741,3439955235&fm=26&fmt=auto" alt="imgla" width="420px" height="500px"></a> <div id="text">there could left some characters</div></div>
+
+<div><a href="https://img1.baidu.com/it/u=1717333171,2638832867&fm=26&fmt=auto"><img class="img4" src="https://img1.baidu.com/it/u=1717333171,2638832867&fm=26&fmt=auto" alt="imgla" width="450px" height="460px"></a>
+    <img class="type" src="https://img1.baidu.com/it/u=1717333171,2638832867&fm=26&fmt=auto" width="450px" height="623px">
+</div>
+
+<div class="resp">
+<div class="img">
+   <a href="https://img1.baidu.com/it/u=3044261220,3500389775&fm=26&fmt=auto"> <img src="https://img1.baidu.com/it/u=3044261220,3500389775&fm=26&fmt=auto"></a>
+</div>under the moonlight which seems as if water at dawn</div>
+
+
+<button>Click this</button>
+<button class="forbidden">forbidden clicking</button>
+<button class="flashbutton"><span>Flashing!</span></button>
+<button class="wavebutton">I am wave ,you are the lover</button>
+<button class="pressbutton">Deep</button>
+<ul>
+    <li><a href="https://www.newcger.com/index.php"><<</a></li>
+    <li><a href="https://www.bangongziyuan.com/">1</a></li>
+    <li><a href="https://www.runoob.com/try/try.php?filename=trycss_buttons_disabled">2</a></li>
+    <li><a href="https://www.newcger.com/index.php"><<</a></li>
+</ul>
+
+<div class="box">from then on ,I came to realize that you and I were alway wound in the long long time ,to a certain degree ,or turn to another word ,I would like to say that we had been together for long and longer time ,even before the univerese existed.</div>
+<div class="content">from then on ,I came to realize that you and I were alway wound in the long long time ,to a certain degree ,or turn to another word ,I would like to say that we had been together for long and longer time ,even before the univerese existed.</div>
+
+<div class="ctn1">
+    <div class="i1">wind</div>
+    <div class="i1">flower</div>
+    <div class="i1">snow</div>
+    <div class="i1">moon</div>
+</div>
+<div class="ctn2">
+    <div class="i5">you</div>
+</div>
+
+<div class="grid">
+    <div class="it1">when</div>
+    <div class="it2">you</div>
+    <div class="it3">came</div>
+    <div class="it4">across</div>
+    <div class="it5">to</div>
+    <div class="it6">me</div>
+    <div class="it7">the</div>
+    <div class="it8">world</div>
+    <div class="it9">lit</div>
+    <div class="it10">up</div>
+</div>
+
+<div class="model">
+    <div class="mi1">Welcome To Fancy World</div>
+    <div class="mi2">here you can find what you want</div>
+    <div class="mi3">so please ease your heart and devote youself in this virtual world ,I gurantee that you would find quite entertainment here!</div>
+    <div class="mi4">please write down your word to the outsider</div>
+    <div class="mi5">deepen to the earth</div>
+    <div class="mi6">let'go to search the treasure ,to begin our adventure!</div>
+    <div class="mi7">all of the rest world just to wait and wait ,ever and ever……</div>
+</div>
+</div>
+
+<div class="otherone"><div id="wel"> <p id="wor">Welcome to fancy world!</p></div>
+    <div id="round"><p id="wind">风声渐息</p></div>
+    <div id="water"><p id="echo">水声回响</p></div>
+    <div id="image"><p id="moon">歌鸟花月</p></div>
+    <div id="box"><p id="kit">青花悬想</p></div>
+    <div id="grad1"></div>
+    <div id="tanni">圆舞曲</div>
+    <div id="conni">冬日舞蹈</div>
+    <p id="fanny">秋日絮语</p>
+    <div id="bs"><img src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.jj20.com%2Fup%2Fallimg%2Ftp01%2F1ZZQ20QJS6-0-lp.jpg&refer=http%3A%2F%2Fimg.jj20.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1640577347&t=98de194aa5a0e111040429b5c563d17a" alt="img" width="600px" height="600px"></div>
+    <div id="boli"><img src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.daimg.com%2Fuploads%2Fallimg%2F140628%2F3-14062Q52P5.jpg&refer=http%3A%2F%2Fimg.daimg.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1640577347&t=f4d91f91061d0d86f44aa428d3143f48" width="100%">
+        <div id="text">
+            狂野的风
+        </div> </div>
+    <div id="manni"><p id="honi">颂歌诗章</p><p id="tani">雅歌旋舞</p></div>
+    <div id="kalr" style="text-overflow: clip"><p id="dawn">当夕阳在天空醉成残血时，我会记得你的身影</p></div>
+    <p id="break">sometimes we would stop our talking to listen to the sound of raindrops downing to dsjhadfhiufnaufaasodifhahsiofhahfoiahfaifuiowe</p>
+    <div id="2d">
+        <img id="hh" src="https://img0.baidu.com/it/u=3185642435,4013061822&fm=26&fmt=auto" alt="img" width="500px" height="600px">
+
+
+        <div class="3d">融雪</div>
+        <div class="3d">融雪</div>
+    </div>
+</div>
+</body>
+</html>
